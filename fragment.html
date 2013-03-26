@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="fragment.css" type="text/css" rel="stylesheet"/>
+        <meta charset="UTF-8"> 
+        <title>VroniPlag Test</title>
+    </head>
+    <body>
+        <h1>Lade ein VroniPlag Fragment als LaTeX herunter</h1>
+        <ul id="actions">
+            <li class="search">
+                <form>
+                    <label>Gib die URL einer Fragmentseite ein:</label>
+                    http://de.vroniplag.wikia.com/wiki/<input name="url" type="text" value="Lm/Fragment_001_05">
+                    <button type="submit">save as LaTeX</button>
+                </form>
+            </li>
+        </ul>
+        <ul id="template-container">
+            <li class="progress">
+                <span>Es wird versucht die Seite <a href="http://de.vroniplag.wikia.com/wiki/Lm/Fragment_001_05">http://de.vroniplag.wikia.com/wiki/Lm/Fragment_001_05</a> oder alle Seiten, die mit der entsprechenden Zeichenkette beginnen, als LaTeX herunter zu laden.</span>
+            </li>
+            <li class="error">
+                <span>Es ist ein Fehler aufgetreten: Die eingegebene URL schien keine Fragementseite zu sein.</span>
+            </li>
+            <li class="success">
+                <span>Die erzeugte <a href="#">LaTeX Datei</a> wurde zum Download angeboten.</span>
+            </li>
+        </ul>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="js/libs/base64.js" type="text/javascript"></script>
+        <script src="js/libs/color.js" type="text/javascript"></script>
+
+        <script src="js/libs/fragcolors.js" type="text/javascript"></script>
+
+        <script src="js/parser/htmlParagraphParser.js" type="text/javascript"></script>
+        <script src="js/parser/htmlSpanParser.js" type="text/javascript"></script>
+        <script src="js/parser/lineBreakParser.js" type="text/javascript"></script>
+        <script src="js/parser/lineParser.js" type="text/javascript"></script>
+
+        <script src="js/processor.js" type="text/javascript"></script>
+
+        <script src="js/laTeX/laTeXContainer.js" type="text/javascript"></script>
+        <script src="js/laTeX/laTeXColorText.js" type="text/javascript"></script>
+        <script src="js/laTeX/laTeXParagraph.js" type="text/javascript"></script>
+        <script src="js/laTeX/laTeXParallel.js" type="text/javascript"></script>
+        <script src="js/laTeX/laTeXDocument.js" type="text/javascript"></script>
+
+        <script src="js/fragment.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/source.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/data-uri-downloader.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/logger.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/fragment-document-builder.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/fragment-form.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/fragment-parser.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/source-parser.js" charset="utf-8" type="text/javascript"></script>
+        <script src="js/vroni-plag-api.js" charset="utf-8" type="text/javascript"></script>
+
+        <script src="fragment.js" charset="utf-8" type="text/javascript"></script>
+    </body>
+</html>
