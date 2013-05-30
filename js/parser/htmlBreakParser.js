@@ -1,16 +1,16 @@
 /*global
     LaTeXContainer
  */
-var HtmlParagraphParser = (function ($) {
+var HtmlBreakParser = (function ($) {
 
     'use strict';
 
-    var htmlParagraphParser = Object.create({
+    var htmlBreakParser = Object.create({
 
             parse: function (text, callback) {
                 var lastIndex = 0,
                     laTeXContainer = new LaTeXContainer(),
-                    regex = /(<p[^>]*>)((.|\n)*?)<\/p>/gi,
+                    regex = /(<br[^>]*>)/gi,
                     result = regex.exec(text);
 
                 while (result) {
@@ -28,6 +28,6 @@ var HtmlParagraphParser = (function ($) {
 
         });
 
-    return Object.freeze(htmlParagraphParser);
+    return Object.freeze(htmlBreakParser);
 
 }(jQuery));

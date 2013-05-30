@@ -1,16 +1,16 @@
 /*global
     LaTeXContainer
  */
-var HtmlParagraphParser = (function ($) {
+var HtmlImgParser = (function ($) {
 
     'use strict';
 
-    var htmlParagraphParser = Object.create({
+    var htmlImgParser = Object.create({
 
             parse: function (text, callback) {
                 var lastIndex = 0,
                     laTeXContainer = new LaTeXContainer(),
-                    regex = /(<p[^>]*>)((.|\n)*?)<\/p>/gi,
+                    regex = /(<img[^>]*>)/gi,
                     result = regex.exec(text);
 
                 while (result) {
@@ -28,6 +28,6 @@ var HtmlParagraphParser = (function ($) {
 
         });
 
-    return Object.freeze(htmlParagraphParser);
+    return Object.freeze(htmlImgParser);
 
 }(jQuery));
