@@ -30,7 +30,7 @@ var LaTeXContainer = (function ($, p) {
 
         laTeXContainer.addChild = function (child) {
             if (typeof child !== 'string'
-                    && (typeof child.toLaTeXBody !== 'function' && typeof child.toLaTeXHeader !== 'function')) {
+                    && (typeof child.toLaTeXBody !== 'function' && typeof child.toLaTeXHeader !== 'function')) {
                 throw new TypeError('child must be either a string or a object supporting the toLaTeXBody() and toLaTeXHeader() functions');
             }
             this.children.push(child);

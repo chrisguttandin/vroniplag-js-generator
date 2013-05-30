@@ -97,8 +97,12 @@ var LaTeXDocument = (function ($, p) {
                     laTeXBody += child.toLaTeXBody();
                 }
             }
-            laTeXBody += p.addLineBreak('\\bibliographystyle{amsplain}');
-            laTeXBody += p.addLineBreak('\\bibliography{bibliography}');
+            if (this.sources.length > 0) {
+                laTeXBody += p.addLineBreak('\\bibliographystyle{amsplain}');
+                laTeXBody += p.addLineBreak('\\bibliography{bibliography}');
+            }
+            laTeXBody += p.addLineBreak('\\listoffigures');
+            laTeXBody += p.addLineBreak('\\listoftables');
             laTeXBody += p.addLineBreak('\\end{document}');
 
             return laTeXBody;
@@ -115,10 +119,13 @@ var LaTeXDocument = (function ($, p) {
                 sourcesLength = sources.length;
 
             laTeXHeader += p.addLineBreak('\\usepackage{t1enc}'); // TODO package is used by double quotes
+            laTeXHeader += p.addLineBreak('\\usepackage{supertabular}'); // TODO package is used by tables
             laTeXHeader += p.addLineBreak('\\usepackage[ngerman]{babel}');
 
             if (this.utf8) {
-                laTeXHeader += p.addLineBreak('\\usepackage[utf8]{inputenx}');
+                laTeXHeader += p.addLineBreak('\\usepackage[utf8]{inputenc}');
+
+                //\usepackage{textcomp}
             }
 
             for (i = 0; i  < childrenLength; i += 1) {
@@ -128,19 +135,23 @@ var LaTeXDocument = (function ($, p) {
                 }
             }
 
+            // TODO wegen der Bilder ist das hier jetzt immer drin
             laTeXHeader += p.addLineBreak('\\usepackage{filecontents}');
-            laTeXHeader += p.addLineBreak('\\begin{filecontents}{bibliography.bib}');
-            for (i = 0; i < sourcesLength; i += 1) {
-                source = sources[i];
-                laTeXHeader += p.addLineBreak('@article{' + source.name.replace(/\s/g, '').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss') + ',');
-                laTeXHeader += p.addLineBreak('\tauthor = {' + source.author + '},');
-                laTeXHeader += p.addLineBreak('\tlocation = {' + source.location + '},');
-                laTeXHeader += p.addLineBreak('\tpublisher = {' + source.publisher + '},');
-                laTeXHeader += p.addLineBreak('\ttitle = {' + source.title + '},');
-                laTeXHeader += p.addLineBreak('\tyear = {' + source.year + '}');
-                laTeXHeader += p.addLineBreak('}');
+            if (sourcesLength > 0) {
+                laTeXHeader += p.addLineBreak('\\usepackage{filecontents}');
+                laTeXHeader += p.addLineBreak('\\begin{filecontents}{bibliography.bib}');
+                for (i = 0; i < sourcesLength; i += 1) {
+                    source = sources[i];
+                    laTeXHeader += p.addLineBreak('@article{' + source.name.replace(/\s/g, '').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss') + ',');
+                    laTeXHeader += p.addLineBreak('\tauthor = {' + source.author + '},');
+                    laTeXHeader += p.addLineBreak('\tlocation = {' + source.location + '},');
+                    laTeXHeader += p.addLineBreak('\tpublisher = {' + source.publisher + '},');
+                    laTeXHeader += p.addLineBreak('\ttitle = {' + source.title + '},');
+                    laTeXHeader += p.addLineBreak('\tyear = {' + source.year + '}');
+                    laTeXHeader += p.addLineBreak('}');
+                }
+                laTeXHeader += p.addLineBreak('\\end{filecontents}');
             }
-            laTeXHeader += p.addLineBreak('\\end{filecontents}');
 
             return laTeXHeader;
         };

@@ -47,8 +47,8 @@ var LaTeXColorText = (function ($, p) {
         laTeXColorText.toLaTeXBody = function () {
             var laTeX = '';
 
-            laTeX += '\\textcolor{' + this.colorName + '}{';
-            laTeX += toLaTeXBody.apply(this);
+            laTeX += '\\textcolor{' + laTeXColorText.colorName + '}{';
+            laTeX += toLaTeXBody.apply(laTeXColorText);
             laTeX += '}';
 
             return laTeX;
@@ -58,8 +58,8 @@ var LaTeXColorText = (function ($, p) {
             var laTeXHeader = '';
 
             laTeXHeader += p.addLineBreak('\\usepackage{color}');
-            laTeXHeader += p.addLineBreak('\\definecolor{' + this.colorName + '}{RGB}{' + this.color.join() + '} ');
-            laTeXHeader += toLaTeXHeader.apply(this);
+            laTeXHeader += p.addLineBreak('\\definecolor{' + laTeXColorText.colorName + '}{RGB}{' + laTeXColorText.color.join() + '} ');
+            laTeXHeader += toLaTeXHeader.apply(laTeXColorText);
 
             return laTeXHeader;
         };

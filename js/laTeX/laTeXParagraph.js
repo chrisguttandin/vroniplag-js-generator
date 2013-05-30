@@ -1,7 +1,8 @@
 /*global
-   LaTeXContainer
+   LaTeXContainer,
+   Processor
  */
-var LaTeXParagraph = (function ($) {
+var LaTeXParagraph = (function ($, p) {
 
     'use strict';
 
@@ -17,11 +18,11 @@ var LaTeXParagraph = (function ($) {
             laTeX += toLaTeXBody.apply(this);
             laTeX += '}';
 
-            return laTeX;
+            return p.addLineBreak(laTeX);
         };
 
         return Object.freeze(laTeXParagraph);
 
     };
 
-}(jQuery));
+}(jQuery, Processor));
