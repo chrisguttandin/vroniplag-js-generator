@@ -31,6 +31,18 @@ var FragmentForm = (function ($) {
                         }
                         values.logger = value;
                     }
+                },
+
+                reportBuilder: {
+                    get: function () {
+                        return values.reportBuilder;
+                    },
+                    set: function (value) {
+                        if (typeof value !== 'object') {
+                            throw new TypeError('reportBuilder must be an object');
+                        }
+                        values.reportBuilder = value;
+                    }
                 }
 
             });
@@ -67,6 +79,13 @@ var FragmentForm = (function ($) {
                         // all fragments
                         result = /^([a-z]+)\/?$/i.exec(url);
                         prefix = encodeURI(result[1] + '/');
+                    } else if (url.match(/^Benutzer:WiseWoman\/Berichte\/[a-z]+$/i)) {
+                        // a report
+                        that.logger.progress('http://de.vroniplag.wikia.com/wiki/' + url);
+                        window.setTimeout(function () {
+                            that.reportBuilder.buildByTitle(url);
+                        }, 0);
+                        return;
                     } else {
                         that.logger.error();
                         return;
@@ -87,6 +106,10 @@ var FragmentForm = (function ($) {
 
         if (typeof options.fragmentDocumentBuilder !== 'undefined') {
             fragmentForm.fragmentDocumentBuilder = options.fragmentDocumentBuilder;
+        }
+
+        if (typeof options.reportBuilder !== 'undefined') {
+            fragmentForm.reportBuilder = options.reportBuilder;
         }
 
         return Object.freeze(fragmentForm);

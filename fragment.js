@@ -2,8 +2,11 @@
     DataURIDownloader,
     FragmentDocumentBuilder,
     FragmentForm,
+    FragmentParser,
     Logger,
     Processor,
+    ReportBuilder,
+    SourceParser,
     VroniPlagAPI
  */
 
@@ -22,6 +25,7 @@
             fragmentForm = new FragmentForm(),
             fragmentParser = new FragmentParser(),
             logger = new Logger(),
+            reportBuilder = new ReportBuilder(),
             $input,
             sourceParser = new SourceParser(),
             url,
@@ -35,8 +39,13 @@
 
         fragmentForm.fragmentDocumentBuilder = fragmentDocumentBuilder;
         fragmentForm.logger = logger;
+        fragmentForm.reportBuilder = reportBuilder;
 
         logger.fragmentForm = fragmentForm;
+
+        reportBuilder.dataURIDownloader = dataURIDownloader;
+        reportBuilder.logger = logger;
+        reportBuilder.vroniPlagAPI = vroniPlagAPI;
 
         $('#actions .search').clone().appendTo($('#template-container'));
         $input = $('form').submit(fragmentForm.submit).find('input').focus().select();

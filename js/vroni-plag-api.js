@@ -30,6 +30,12 @@ var VroniPlagAPI = (function ($) {
                         }
                         return values.url;
                     }
+                },
+
+                wikiaUrlPrefix: {
+                    get: function () {
+                        return 'http://de.vroniplag.wikia.com/wiki/';
+                    }
                 }
 
             });
@@ -74,6 +80,23 @@ var VroniPlagAPI = (function ($) {
                     callback(content);
                 },
                 url: this.url
+            });
+        };
+
+        /*
+         *  gets the html of a page by it's title
+         */
+        vroniPlagAPI.getPageHtmlByTitle = function (title, callback) {
+            $.ajax({
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    callback(data);
+                },
+                url: this.url + '?url=' + encodeURIComponent(this.wikiaUrlPrefix + title)
             });
         };
 

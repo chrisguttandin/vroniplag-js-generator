@@ -17,8 +17,8 @@ var Processor = (function ($) {
             },
 
             convertHtmlDashes: function (text) {
-                return text.replace(/&mdash;/g, '---');
-                return text.replace(/&ndash;/g, '--');
+                return text.replace(/&mdash;/g, '---')
+                    .replace(/&ndash;/g, '--');
             },
 
             convertHtmlQuotes: function (text) {
@@ -26,7 +26,11 @@ var Processor = (function ($) {
             },
 
             convertHtmlEntities: function (text) {
-                return text.replace(/&amp;/g, '\\&');
+                return text.replace(/&amp;/g, '\\&')
+                    .replace(/&gt;/g, '>')
+                    .replace(/&lt;/g, '<')
+                    .replace(/&nbsp;/g, ' ')
+                    .replace(/&sum;/g, '$\\sum$');
             },
 
             convertHtmlTags: function (text) {
@@ -53,7 +57,9 @@ var Processor = (function ($) {
 
             escapeLaTexCharacters: function (text) {
                 return text.replace(/-/g, '--')
-                    .replace(/\$/g, '\\$');
+                    .replace(/\$/g, '\\$')
+                    .replace(/%/g, '\\%')
+                    .replace(/\^/g, '\\textasciicircum');
             },
 
             process: function (text, functions) {
@@ -85,6 +91,13 @@ var Processor = (function ($) {
                 return text.replace(/ +(?= )/g, '');
             },
 
+            removeSpecialCharacters: function (text) {
+                return text.replace(/→/g, '')
+                    .replace(/∑/g, '$\\sum$')
+                    .replace(//g, '') // da steht tatsächlich was zwischen den //
+                    .replace(//g, '');
+            },
+
             // "    <p>" => "<p>"
             // "</span>   <ul>" => "</span><ul>"
             // "</section>   " => "</section>"
@@ -93,7 +106,6 @@ var Processor = (function ($) {
                     .replace(/(<\/\w>) *(<\w[^>]*>)/g, '$1$2')
                     .replace(/(<\/?\w>) *$/m, '$1');
             }
-
         });
 
     return Object.freeze(processor);

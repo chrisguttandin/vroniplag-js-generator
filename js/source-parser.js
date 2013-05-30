@@ -9,8 +9,7 @@ var SourceParser = (function ($) {
 
         options = options || {};
 
-        var values = {},
-            sourceParser = Object.create({});
+        var sourceParser = Object.create({});
 
         sourceParser.isSource = function (content) {
             return content.match(/SMWQuelle/);
