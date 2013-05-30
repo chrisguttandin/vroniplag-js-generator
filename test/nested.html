@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Tests</title>
+        <script type="text/javascript">
+
+            var text = "<tag> balllsdcsv <tag> sfwrgfwrg <tag> sfwrgfwrg </tag> xxx </tag> dfwfgwgwg </tag> ZWISCHENDRIN<tag> DOSOSO <tag> sfwrgfwrg <tag> sfwrgfwrg </tag> xxx </tag> dfwfgwgwg </tag>HALLO LEUTE";
+
+            var lastIndex = 0;
+            var openingTagRegex = '<tag[^>]*>';
+            var closingTagRegex = '<\/tag>';
+            var regex = new RegExp('(' + openingTagRegex + ')(.*?)' + closingTagRegex, 'gi');
+            var result = regex.exec(text);
+
+            while (result) {
+
+                var nestedTagsRegex = new RegExp(openingTagRegex, 'gi');
+                var nestedTagsResult = result[2].match(nestedTagsRegex);
+                if (nestedTagsResult) {
+
+                    var nestedTags = [],
+                        i;
+                    for (var i = 0; i < nestedTagsResult.length; i += 1) {
+                        nestedTags[i] = closingTagRegex;
+                    }
+                    var nestedRegex = new RegExp('(' + openingTagRegex + ')(.*?' + nestedTags.join('.*?') + '.*?)' + closingTagRegex, 'gi');
+                    result = nestedRegex.exec(text);
+                }
+                console.log(result);
+
+
+                if (result.index > lastIndex) {
+
+                    console.log('return: ' + text.slice(lastIndex, result.index));
+
+                }
+                console.log('treffer: ' + result[2]);
+                //lastIndex = regex.lastIndex;
+                console.log('');
+                console.log(text);
+                console.log('');
+                text = text.slice(result.index + result[0].length + 1);
+                console.log(text);
+                console.log('');
+                result = new RegExp('(' + openingTagRegex + ')(.*?)' + closingTagRegex, 'gi').exec(text);
+                console.log(result);
+            }
+
+            console.log('return end: ' + text);
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
